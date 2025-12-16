@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { createRoot } from 'react-dom/client';
 import { ControlPanel } from './components/ControlPanel';
 import { PhotoSelector } from './components/PhotoSelector';
 import { extractImageUrls, createZipFile } from './utils/photoUtils';
@@ -26,7 +25,7 @@ const PhotoGrabber: React.FC = () => {
   useEffect(() => {
     // Check if we're on Google Photos
     const checkDomain = () => {
-      const isOnGooglePhotos = window.location.hostname === 'photos.google.com';
+      const isOnGooglePhotos = window.location.hostname === 'photos.google.com' || import.meta.env.DEV;
       setIsGooglePhotos(isOnGooglePhotos);
       if (!isOnGooglePhotos) {
         setState(prev => ({ ...prev, isActive: false }));

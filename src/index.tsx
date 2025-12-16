@@ -1,4 +1,3 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
 import PhotoGrabber from './App';
 
@@ -38,6 +37,11 @@ if (typeof window !== 'undefined') {
       // Don't auto-inject on DOM ready, wait for explicit call
     });
   }
+}
+
+// Auto-inject in development
+if (import.meta.env.DEV) {
+  injectPhotoGrabber();
 }
 
 export { injectPhotoGrabber };

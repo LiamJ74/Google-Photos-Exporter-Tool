@@ -42,7 +42,7 @@ export class PhotoSelector {
         // Add event listener
         checkbox.addEventListener('change', (e) => {
           const target = e.target as HTMLInputElement;
-          const photoElement = target.closest('[role="gridcell"]') || target.parentElement;
+          const photoElement = (target.closest('[role="gridcell"]') || target.parentElement) as HTMLElement;
           
           if (target.checked) {
             photoElement?.classList.add(PhotoSelector.SELECTED_CLASS);
@@ -70,7 +70,7 @@ export class PhotoSelector {
         
         // Make container relative if not already
         if (getComputedStyle(photoContainer).position === 'static') {
-          photoContainer.style.position = 'relative';
+          (photoContainer as HTMLElement).style.position = 'relative';
         }
         
         photoContainer.appendChild(checkboxContainer);

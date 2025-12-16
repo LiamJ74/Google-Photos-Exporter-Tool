@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
-import { Download, Image, Check, X, Loader2 } from 'lucide-react';
+import { Download, Image, X, Loader2 } from 'lucide-react';
 
 interface ControlPanelProps {
   isActive: boolean;

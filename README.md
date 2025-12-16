@@ -1,189 +1,137 @@
-PhotoGrabber
-Outil de téléchargement bulk pour Google Photos
+# PhotoGrabber
+**Bulk Downloader for Google Photos**
 
-PhotoGrabber est une application React innovante qui s'intègre directement à Google Photos pour permettre la sélection et le téléchargement en masse de photos. Fonctionnant comme un bookmarklet, l'outil s'injecte dans l'interface existante de Google Photos sans nécessiter d'extension ou de logiciel externe.
+PhotoGrabber is an innovative React application that integrates directly into Google Photos to allow bulk selection and downloading of photos. Functioning as a bookmarklet, the tool injects itself into the existing Google Photos interface without requiring an extension or external software.
 
-🎯 Objectif
-PhotoGrabber résout un problème courant : l'impossibilité de télécharger facilement plusieurs photos de Google Photos en une seule fois. L'application ajoute une interface de sélection intuitive directement dans Google Photos, permettant aux utilisateurs de :
+## 🎯 Goal
+PhotoGrabber solves a common problem: the inability to easily download multiple photos from Google Photos at once without creating albums or using Takeout. The application adds an intuitive selection interface directly into Google Photos, allowing users to:
 
-Sélectionner visuellement des photos avec des cases à cocher
-Télécharger les photos sélectionnées dans un fichier ZIP
-Tout faire directement dans le navigateur, sans serveur externe
-🚀 Fonctionnalités
-📸 Sélection de Photos
-Interface flottante : Panneau de contrôle non intrusif dans le coin supérieur droit
-Cases à cocher : Ajout automatique sur chaque miniature de photo
-Feedback visuel : Contour bleu sur les photos sélectionnées
-Compteur en temps réel : Affiche le nombre de photos sélectionnées
-📦 Téléchargement Bulk
-Génération ZIP : Création côté client d'un fichier ZIP contenant toutes les photos
-Conversion automatique : Transforme les vignettes en images pleine résolution
-Progression visuelle : Indicateur de chargement pendant la création du ZIP
-Notification de succès : Message de confirmation une fois le téléchargement terminé
-🔧 Intégration Bookmarklet
-Injection en un clic : Lancement via bookmarklet depuis la barre de favoris
-Détection automatique : Vérifie si l'utilisateur est sur photos.google.com
-Gestion d'erreurs : Message clair si utilisé sur la mauvaise page
-Nettoyage automatique : Suppression propre de l'interface après utilisation
-🛠️ Architecture Technique
-Structure du Projet
-photo-grabber/ ├── src/ │ ├── App.tsx # Composant principal de l'application │ ├── index.tsx # Point d'entrée et logique d'injection │ ├── main.tsx # Exposition globale des fonctions │ ├── components/ │ │ ├── ControlPanel.tsx # Panneau de contrôle flottant │ │ ├── PhotoSelector.tsx # Logique de sélection des photos │ │ ├── ui/ │ │ │ ├── button.tsx # Composant Button (Shadcn) │ │ │ └── badge.tsx # Composant Badge (Shadcn) │ ├── utils/ │ │ ├── photoUtils.ts # Utilitaires de traitement d'images │ │ └── cn.ts # Utilitaire de fusion de classes │ └── types/ # Définitions TypeScript ├── public/ │ └── photo-grabber.js # Script bundle pour bookmarklet └── README.md
+- Visually select photos with checkboxes.
+- Download selected photos in a ZIP file.
+- Do everything directly in the browser, client-side.
 
-Stack Technique
-React 18 : Framework principal avec hooks modernes
-TypeScript : Typage strict pour la robustesse du code
-Tailwind CSS : Styling utilitaire et design responsive
-Shadcn UI : Composants UI pré-construits et personnalisables
-Lucide React : Icônes modernes et cohérentes
-Framer Motion : Animations fluides et micro-interactions
-📦 Installation
-Prérequis
-Node.js 18+
-npm ou yarn
-Navigateur Chrome (recommandé pour Google Photos)
-Installation Locale
-file.sh
-Build de Production
-file.sh
-🔧 Configuration
-Variables d'Environnement
-Créez un fichier .env.local à la racine :
+## 🚀 Features
 
-file.txt
-Configuration du Bookmarklet
-Build du projet :
+### 📸 Photo Selection
+- **Floating Interface**: Non-intrusive control panel in the top right corner.
+- **Checkboxes**: Automatically added to each photo thumbnail.
+- **Visual Feedback**: Blue outline on selected photos.
+- **Real-time Counter**: Displays the number of selected photos.
 
-npm run build
-Hébergement du bundle :
+### 📦 Bulk Download
+- **ZIP Generation**: Client-side creation of a ZIP file containing all photos.
+- **Automatic Conversion**: Transforms thumbnails into full-resolution images (where possible).
+- **Visual Progress**: Loading indicator during ZIP creation.
+- **Success Notification**: Confirmation message once the download is complete.
 
-Uploadez dist/photo-grabber.js sur votre serveur
-Notez l'URL complète (ex: https://votredomaine.com/photo-grabber.js)
-Création du bookmarklet :
+### 🔧 Bookmarklet Integration
+- **One-Click Injection**: Launch via bookmarklet from the bookmarks bar.
+- **Automatic Detection**: Checks if the user is on `photos.google.com`.
+- **Error Handling**: Clear message if used on the wrong page.
+- **Auto Cleanup**: Clean removal of the interface after use.
 
-javascript:(function(){const script=document.createElement('script');script.src='https://votredomaine.com/photo-grabber.js';document.head.appendChild(script);})();
-📖 Guide d'Utilisation
-Étape 1 : Installation du Bookmarklet
-Faites un clic droit sur votre barre de favoris Chrome
-Choisissez "Ajouter une page"
-Nommez-le "PhotoGrabber"
-Collez le code JavaScript du bookmarklet dans le champ URL
-Étape 2 : Utilisation sur Google Photos
-Navigation : Allez sur photos.google.com
-Lancement : Cliquez sur le bookmarklet PhotoGrabber
-Activation : Cliquez sur "Select Photos" dans le panneau flottant
-Sélection : Cochez les photos que vous voulez télécharger
-Téléchargement : Cliquez sur "Download" pour générer le ZIP
-Étape 3 : Récupération des Fichiers
-Le fichier ZIP sera téléchargé automatiquement
-Nom par défaut : google-photos-download.zip
-Les images sont en pleine résolution
-🎨 Personnalisation
-Thème et Couleurs
-Le thème est défini dans src/App.tsx :
+## 🛠️ Technical Architecture
 
-file.tsx
-Modification des Sélecteurs CSS
-Adaptez les sélecteurs dans src/components/PhotoSelector.tsx :
+### Project Structure
+```
+photo-grabber/
+├── src/
+│   ├── App.tsx                 # Main application component
+│   ├── index.tsx               # Entry point and injection logic
+│   ├── main.tsx                # Global exposure of functions
+│   ├── components/
+│   │   ├── ControlPanel.tsx    # Floating control panel
+│   │   ├── PhotoSelector.tsx   # Photo selection logic
+│   │   └── ui/                 # Shared UI components (Shadcn)
+│   ├── utils/
+│   │   ├── photoUtils.ts       # Image processing utilities
+│   │   └── cn.ts               # Class merging utility
+│   └── types/                  # TypeScript definitions
+├── public/
+│   └── photo-grabber.js        # Bundle script for bookmarklet (after build)
+└── README.md
+```
 
-file.tsx
-Personnalisation de l'UI
-Modifiez le composant ControlPanel.tsx pour changer :
+### Tech Stack
+- **React 18**: Main framework with modern hooks.
+- **TypeScript**: Strict typing for code robustness.
+- **Tailwind CSS**: Utility styling and responsive design.
+- **Shadcn UI**: Pre-built and customizable UI components.
+- **Lucide React**: Modern and consistent icons.
+- **Framer Motion**: Smooth animations and micro-interactions.
+- **JSZip**: For client-side ZIP generation.
 
-Position du panneau
-Taille et couleurs des boutons
-Textes et labels
-🔍 Débogage et Tests
-Mode Développement
-file.sh
-Tests Manuels
-Test d'injection :
+## 📦 Installation
 
-// Dans la console
-injectPhotoGrabber()
-Vérification de l'API :
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+- Chrome Browser (recommended for Google Photos)
 
-// Vérifier les fonctions exposées
-console.log(window.PhotoGrabberAPI)
-Test sur différentes pages :
+### Local Development
+1. Clone the repository.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-Google Photos (devrait fonctionner)
-Autres sites (message d'erreur attendu)
-Débogage des Sélecteurs
-file.js
-🚨 Limitations et Solutions
-Limitations Actuelles
-CORS : Les images doivent être accessibles via le même domaine
-Performance : Le téléchargement de nombreuses photos peut être lent
-DOM Dynamique : Google Photos modifie son DOM fréquemment
-Solutions Implémentées
-Détection automatique : Vérification continue des changements de page
-Gestion d'erreurs : Messages clairs pour l'utilisateur
-Nettoyage : Suppression propre des éléments ajoutés
-Améliorations Futures
-[ ] Support du défilement infini
-[ ] Filtrage par date/album
-[ ] Compression d'images optionnelle
-[ ] Support d'autres plateformes (Instagram, Facebook)
-🤝 Contribution
-Guidelines de Contribution
-Fork le projet
-Créer une branche feature : git checkout -b feature/nouvelle-fonctionnalite
-Commit les changements : git commit -m 'Ajout de nouvelle fonctionnalité'
-Push : git push origin feature/nouvelle-fonctionnalite
-Pull Request avec description détaillée
-Standards de Code
-TypeScript strict activé
-ESLint pour la qualité du code
-Prettier pour le formatage
-Conventional Commits pour les messages
-Tests
-file.sh
-📄 Licence
-Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
+### Production Build
+To create the standalone script for the bookmarklet:
 
-Points Clés de la Licence
-✅ Utilisation commerciale autorisée
-✅ Modification autorisée
-✅ Distribution autorisée
-✅ Utilisation privée autorisée
-❌ Responsabilité limitée
-❌ Pas de garantie
-🆘 Support et Aide
-Documentation Complémentaire
-API Reference
-Guide de Développement
-FAQ
-Signalement de Bugs
-Vérifier les issues existantes
-Créer une nouvelle issue avec :
-Description détaillée du problème
-Screenshots si applicable
-Étapes pour reproduire
-Configuration du navigateur/OS
-Contact
-Email : contact@photograbber.dev
-Discord : Serveur Discord
-Twitter : @PhotoGrabberApp
-🎉 Remerciements
-Contributeurs
-Merci à tous les contributeurs qui ont rendu ce projet possible
-Support de la communauté open source
-Technologies Utilisées
-React - Framework frontend
-Tailwind CSS - Framework CSS
-Shadcn UI - Composants UI
-Lucide - Icônes
-TypeScript - Typage JavaScript
-📈 Roadmap
-Version 1.1 (Prochaine)
-[ ] Support du drag-and-drop pour la sélection
-[ ] Miniatures dans le panneau de contrôle
-[ ] Options de qualité d'image
-Version 1.2
-[ ] Support multi-langues
-[ ] Thèmes clairs/sombres
-[ ] Raccourcis clavier
-Version 2.0
-[ ] Extension Chrome officielle
-[ ] API pour développeurs
-[ ] Intégration cloud (Google Drive, Dropbox)
+1. Build the project:
+   ```bash
+   npm run build
+   ```
+   This will generate `dist/photo-grabber.js`.
+
+## 🔧 Configuration & Usage
+
+### 1. Hosting the Bundle
+For the bookmarklet to work, the built JavaScript file must be accessible via a URL.
+- Upload `dist/photo-grabber.js` to a static file host (e.g., GitHub Pages, Vercel, Netlify, or your own server).
+- Note the full URL (e.g., `https://yourdomain.com/photo-grabber.js`).
+
+### 2. Creating the Bookmarklet
+1. Right-click on your Chrome bookmarks bar.
+2. Choose "Add Page".
+3. Name it "PhotoGrabber".
+4. Paste the following JavaScript code into the URL field (replace `YOUR_URL_HERE` with your actual URL):
+
+```javascript
+javascript:(function(){const script=document.createElement('script');script.src='YOUR_URL_HERE/photo-grabber.js';document.head.appendChild(script);})();
+```
+
+### 3. Using on Google Photos
+1. **Navigate**: Go to [photos.google.com](https://photos.google.com).
+2. **Launch**: Click the PhotoGrabber bookmarklet.
+3. **Activate**: Click "Select Photos" in the floating panel.
+4. **Select**: Check the photos you want to download.
+5. **Download**: Click "Download" to generate the ZIP.
+
+## 🚨 Limitations & Solutions
+
+### Current Limitations
+1. **CORS**: Images must be accessible via the same domain or allow Cross-Origin requests. Google Photos CDNs usually allow this, but changes in security policies might affect it.
+2. **Performance**: Downloading hundreds of photos at once depends on browser memory and network speed.
+3. **Dynamic DOM**: Google Photos updates its DOM frequently. Selectors in `PhotoSelector.tsx` might need updates if Google changes class names.
+
+## 🤝 Contribution
+
+### Contribution Guidelines
+1. Fork the project.
+2. Create a feature branch: `git checkout -b feature/new-feature`
+3. Commit changes: `git commit -m 'Add new feature'`
+4. Push: `git push origin feature/new-feature`
+5. Create a Pull Request.
+
+### Code Standards
+- **Strict TypeScript**
+- **ESLint** & **Prettier**
+- **Conventional Commits**
+
+## 📄 License
+This project is licensed under the MIT License.
