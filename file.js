@@ -1,1 +1,0 @@
-javascript:(function(){const script=document.createElement('script');script.src='https://yourdomain.com/photo-grabber.js';document.head.appendChild(script);})();
