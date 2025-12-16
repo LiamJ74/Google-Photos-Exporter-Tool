@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "PhotoGrabber",
+  "version": "1.0.0",
+  "description": "Bulk Downloader for Google Photos",
+  "icons": {
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://photos.google.com/*"],
+      "js": ["photo-grabber.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_title": "PhotoGrabber"
+  }
+}
